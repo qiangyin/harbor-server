@@ -60,7 +60,7 @@ public class HarborServiceAPIImpl implements HarborServiceAPI {
         params.add("principal", StringUtils.isEmpty(loginUserVo.getPrincipal()) ? username : loginUserVo.getPrincipal());
         params.add("password", StringUtils.isEmpty(loginUserVo.getPrincipal()) ? password : loginUserVo.getPassword());
         HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<MultiValueMap<String, String>>(params, headers);
-        HttpHeaders httpHeaders = SSLRestTemplateUtil.getInstance().postForEntity("https://10.112.101.90/login", requestEntity, String.class).getHeaders();
+        HttpHeaders httpHeaders = SSLRestTemplateUtil.getInstance().postForEntity("https://192.168.101.90/login", requestEntity, String.class).getHeaders();
         return httpHeaders;
     }
 
@@ -104,7 +104,7 @@ public class HarborServiceAPIImpl implements HarborServiceAPI {
     @Override
     public String saveProjects(@RequestBody ProjectVO projectVO) {
         HttpHeaders headers = this.getHttpHeaders();
-        String body = SSLRestTemplateUtil.getInstance().postForEntity("https://10.112.101.90/api/projects", JSONArray.toJSONString(projectVO), String.class).getBody();
+        String body = SSLRestTemplateUtil.getInstance().postForEntity("https://192.168.101.90/api/projects", JSONArray.toJSONString(projectVO), String.class).getBody();
         return body;
     }
 
@@ -126,13 +126,13 @@ public class HarborServiceAPIImpl implements HarborServiceAPI {
         params.add("principal", "admin");
         params.add("password", "Harbor12345");
         HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<MultiValueMap<String, String>>(params, headers);
-        HttpHeaders httpHeaders = SSLRestTemplateUtil.getInstance().postForEntity("https://10.112.101.90/login", requestEntity, String.class).getHeaders();
+        HttpHeaders httpHeaders = SSLRestTemplateUtil.getInstance().postForEntity("https://192.168.101.90/login", requestEntity, String.class).getHeaders();
 
         HttpHeaders headers1 = new HttpHeaders();
         ProjectVO bb = new ProjectVO();
         bb.setProjectName("4561");
         bb.setIspublic(1);
         headers1.setContentType(MediaType.APPLICATION_JSON);
-        HttpHeaders httpHeaders1 = SSLRestTemplateUtil.getInstance().postForEntity("https://10.112.101.90/api/projects", JSONArray.toJSONString(bb), String.class).getHeaders();
+        HttpHeaders httpHeaders1 = SSLRestTemplateUtil.getInstance().postForEntity("https://192.168.101.90/api/projects", JSONArray.toJSONString(bb), String.class).getHeaders();
     }
 }
